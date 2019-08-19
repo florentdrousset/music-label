@@ -6,3 +6,7 @@
 index:
   path: /
   controller: App\Controller\WelcomeController::welcome
+
+admin:
+  path: /admin/test
+  controller: App\Controller\AdminController::test
