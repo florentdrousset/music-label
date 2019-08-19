@@ -35,6 +35,10 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('address', TextType::class)
+            ->add('zipCode', TextType::class)
+            ->add('city', TextType::class)
+            ->add('phone', TextType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -43,10 +47,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('address', TextType::class)
-            ->add('zipCode', TextType::class)
-            ->add('city', TextType::class)
-            ->add('phone', TextType::class)
         ;
     }
 
