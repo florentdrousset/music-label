@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -25,7 +27,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json", nullable=true)
      */
-    private $roles = [];
+    private $roles = ['ADMIN_USER'];
 
     /**
      * @var string The hashed password
@@ -63,6 +65,16 @@ class User implements UserInterface
      */
     private $phone;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\News", inversedBy="usersId")
+     */
+    private $news;
+
+    public function __construct()
+    {
+        $this->news = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,7 +109,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        //$roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -209,6 +221,32 @@ class User implements UserInterface
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|News[]
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(News $news): self
+    {
+        if (!$this->news->contains($news)) {
+            $this->news[] = $news;
+        }
+
+        return $this;
+    }
+
+    public function removeNews(News $news): self
+    {
+        if ($this->news->contains($news)) {
+            $this->news->removeElement($news);
+        }
 
         return $this;
     }
