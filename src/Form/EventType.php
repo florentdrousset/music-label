@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Artist;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class EventType extends AbstractType
 {
@@ -15,8 +16,8 @@ class EventType extends AbstractType
     {
         $builder
             ->add('type')
-            ->add('date_start')
-            ->add('date_end')
+            ->add('date_start', DateType::class)
+            ->add('date_end', DateType::class)
             ->add('location')
             ->add('city')
             ->add('description')

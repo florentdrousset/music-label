@@ -43,10 +43,16 @@ class News
      */
     private $customers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="news")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->customer_id = new ArrayCollection();
         $this->customers = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,6 +145,34 @@ class News
         if ($this->customers->contains($customer)) {
             $this->customers->removeElement($customer);
             $customer->removeIdNews($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addNews($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeNews($this);
         }
 
         return $this;

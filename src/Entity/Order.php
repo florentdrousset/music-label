@@ -44,6 +44,11 @@ class Order
      */
     private $support_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orderId")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->support_id = new ArrayCollection();
@@ -129,6 +134,18 @@ class Order
                 $supportId->setOrderId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
