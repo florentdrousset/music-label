@@ -40,6 +40,8 @@ class ArtistController extends AbstractController
             //on previent doctrine qu'il faut prendre en compte cette objet
             $entityManager->flush();
             //on remplit la base de données.
+            $this->addFlash('success', 'Artiste ajouté');
+
             return $this->redirectToRoute('artist_index');
         }
 
