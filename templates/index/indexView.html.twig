@@ -17,10 +17,9 @@
     <div class="container">
         <h2>Concerts à venir</h2>
     <div class="row">
-        <div class="col-sm-6 col-md-4">
             {% for concert in event %}
-            <div class="thumbnail">
-                <img src="{{ asset('img/' ~ concert.img) }}" alt="...">
+            <div class="thumbnail ml-3">
+                <img src="{{ asset('img/' ~ concert.img) }}" alt="photo de concert">
                 <div class="caption">
                     <h3>{{ concert.type }}</h3>
                     <p>{{ concert.description }}</p>
@@ -28,7 +27,6 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
     </div>
     </div>
 {% endblock %}
