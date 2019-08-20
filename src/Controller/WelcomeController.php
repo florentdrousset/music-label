@@ -4,12 +4,14 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EventRepository;
 
 class WelcomeController extends AbstractController {
-    public function welcome() {
+    public function welcome(EventRepository $eventRepository) {
        return $this->render(
-           'index/indexView.html.twig'
+           'index/indexView.html.twig', [
+               'event' => $eventRepository->findAll()
+           ]
        );
     }
-
 }

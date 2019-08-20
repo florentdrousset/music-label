@@ -1,1 +1,15 @@
-Salut l'admin !
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>Admin</h1>
+        <p>Bienvenue sur le panel d'administration</p>
+        <p><a class="btn btn-primary btn-lg" href="{{ path('artist_index') }}" role="button">Artistes</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{{ path('product_index') }}" role="button">Produits</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{{ path('user_index') }}" role="button">Utilisateurs</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{{ path('event_index') }}" role="button">Evènements</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{{ path('streaming_index') }}" role="button">Streaming</a></p>
+    </div>
+{% endblock %}

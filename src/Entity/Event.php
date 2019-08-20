@@ -57,6 +57,11 @@ class Event
      */
     private $artist_id;
 
+    /**
+     * @ORM\Column(type="string", length=400, nullable=true)
+     */
+    private $img;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +159,18 @@ class Event
     public function setArtistId(?Artist $artist_id): self
     {
         $this->artist_id = $artist_id;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
 
         return $this;
     }

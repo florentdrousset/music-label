@@ -26,6 +26,7 @@ class EventType extends AbstractType
                 'class' => Artist::class,
                 'choice_label' => 'name'
             ])
+            ->add('img')
         ;
     }
 
