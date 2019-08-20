@@ -22,7 +22,7 @@
                 <a class="nav-link" href="{{ path('app_register') }}">News</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_register') }}">Musique</a>
+                <a class="nav-link" href="{{ path('products') }}">Musique</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('event_index') }}">Evenements</a>
@@ -35,6 +35,7 @@
         </ul>
         {% for message in app.flashes('success') %}
         <div class="alert alert-success">
+
             {{ message }}
         </div>
         {% endfor %}

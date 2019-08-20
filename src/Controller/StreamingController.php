@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/streaming")
+ * @Route("/admin/streaming")
  */
 class StreamingController extends AbstractController
 {

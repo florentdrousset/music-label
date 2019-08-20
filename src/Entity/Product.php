@@ -33,6 +33,16 @@ class Product
      */
     private $streamings;
 
+    /**
+     * @ORM\Column(type="string", length=4000)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=800, nullable=true)
+     */
+    private $img;
+
     public function __construct()
     {
         $this->streamings = new ArrayCollection();
@@ -101,5 +111,29 @@ class Product
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
     }
 }

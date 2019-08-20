@@ -10,3 +10,7 @@ index:
 admin:
   path: /admin/test
   controller: App\Controller\AdminController::test
+
+products:
+  path: /products
+  controller: App\Controller\ProductController::userIndex

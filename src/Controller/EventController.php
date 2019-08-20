@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @Route("/event")
+ * @Route("/admin/event")
  */
 class EventController extends AbstractController
 {
@@ -75,6 +75,7 @@ class EventController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
+            $this->addFlash('success', 'Evenement ajouté !');
 
             return $this->redirectToRoute('event_index');
         }

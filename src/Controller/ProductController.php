@@ -9,9 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @Route("/product")
+ * @Route("admin/product")
  */
 class ProductController extends AbstractController
 {
@@ -21,6 +23,13 @@ class ProductController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         return $this->render('product/index.html.twig', [
+            'products' => $productRepository->findAll(),
+        ]);
+    }
+
+    public function userIndex(ProductRepository $productRepository): Response
+    {
+        return $this->render('product/userIndex.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
     }
@@ -35,11 +44,37 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $img */
+            $img = $form['img']->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($img) {
+                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$img->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $img->move(
+                        $this->getParameter('img_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $product->setImg($newFilename);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
+            $this->addFlash('success', 'Evenement ajouté !');
 
-            return $this->redirectToRoute('product_index');
+            return $this->redirectToRoute('event_index');
         }
 
         return $this->render('product/new.html.twig', [
