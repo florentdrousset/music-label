@@ -28,6 +28,14 @@ class EventController extends AbstractController
             'events' => $eventRepository->findAll(),
         ]);
     }
+
+    public function userIndex(EventRepository $eventRepository): Response
+    {
+        return $this->render('event/userIndex.html.twig', [
+            'events' => $eventRepository->findAll(),
+        ]);
+    }
+
     /**
      * @Route("/", name="event_public", methods={"GET"})
      */

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    {% for e in events %}
+        <h4>{{ e.type }}</h4>
+        <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/' ~ e.img) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">{{ e.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

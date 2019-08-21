@@ -14,3 +14,7 @@ admin:
 products:
   path: /products
   controller: App\Controller\ProductController::userIndex
+
+events:
+  path: /events
+  controller: App\Controller\EventController::userIndex
