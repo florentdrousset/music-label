@@ -7,10 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\EventRepository;
 
 class WelcomeController extends AbstractController {
-    public function welcome(EventRepository $eventRepository) {
+    public function welcome(EventRepository $eventRepository, \App\Hello\HelloWorld $h) {
        return $this->render(
            'index/indexView.html.twig', [
-               'event' => $eventRepository->findAll()
+               'event' => $eventRepository->findAll(),
+               'message' => $h->yo()
            ]
        );
     }
