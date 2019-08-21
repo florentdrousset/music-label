@@ -11,7 +11,7 @@ class WelcomeController extends AbstractController {
        return $this->render(
            'index/indexView.html.twig', [
                'event' => $eventRepository->findAll(),
-               'message' => $h->yo()
+               'message' => $h->yoUpper()
            ]
        );
     }

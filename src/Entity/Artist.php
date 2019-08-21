@@ -43,9 +43,15 @@ class Artist
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="artist")
+     */
+    private $products;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +132,37 @@ class Artist
             // set the owning side to null (unless already changed)
             if ($evenement->getArtistId() === $this) {
                 $evenement->setArtistId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
+            // set the owning side to null (unless already changed)
+            if ($product->getArtist() === $this) {
+                $product->setArtist(null);
             }
         }
 

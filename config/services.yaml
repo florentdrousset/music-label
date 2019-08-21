@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     img_directory: '%kernel.project_dir%/public/img'
+    p1: 'Patrick'
 
 services:
     # default configuration for services in *this* file
@@ -31,3 +32,5 @@ services:
     App\Hello\HelloWorld:
         arguments:
             $p: 'Hector'
+            $prenom: '%p1%'
+            #ici, le %p1% fait référence à notre paramètre p1

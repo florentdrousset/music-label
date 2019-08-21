@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Artist;
 
 class ProductType extends AbstractType
 {
@@ -16,6 +19,11 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('artist', EntityType::class, [
+                'class' => Artist::class,
+                'choice_label' => 'name'
+            ]
+        )
             ->add('production_date')
             ->add('description')
             ->add('img', FileType::class, [

@@ -43,6 +43,11 @@ class Product
      */
     private $img;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Artist", inversedBy="products")
+     */
+    private $artist;
+
     public function __construct()
     {
         $this->streamings = new ArrayCollection();
@@ -133,6 +138,18 @@ class Product
     public function setImg(?string $img): self
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    public function getArtist(): ?Artist
+    {
+        return $this->artist;
+    }
+
+    public function setArtist(?Artist $artist): self
+    {
+        $this->artist = $artist;
 
         return $this;
     }
