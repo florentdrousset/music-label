@@ -4,14 +4,22 @@
 {% endblock %}
 
 {% block body %}
+
     <style>
         img {
             width: 300px;
         }
     </style>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="jumbotron">
         <h1>Symfony Records</h1>
         <p>{{ message }}</p>
+        <p>{{ location }}</p>
         <p>Bienvenue sur le site de Symfony Records.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Api\GuzzleController;
 use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
@@ -37,9 +38,23 @@ class EventController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="event", methods={"GET"})
+     */
+
+    public function specificEvent(EventRepository $eventRepository, GuzzleController $curl, Event $event)
+    {
+        $json = $curl->curlRequest($event->getCity());
+        $location = json_decode($json, true);
+        return $this->render('event/eventView.html.twig', [
+            'event' => $event,
+            'location' => $location
+        ]);
+    }
+
+    /**
      * @Route("/", name="event_public", methods={"GET"})
      */
-    public function showEvents(EventRepository $eventRepository) {
+    public function showEvents(Event $event) {
         return $this->render('event/publicIndex.html.twig', [
             'events' => $eventRepository->findAll()
             ]);

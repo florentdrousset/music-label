@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+        <h4>{{ event.type }}</h4>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <p>{{ event.description }}</p>
+                <p>Localisation : {{ event.city }}</p>
+                <p></p>
+            </div>
+            <div id="mapid" style="height:180px">
+                {% include 'leaflet/leaflet.html.twig' %}
+            </div>
+{% endblock %}

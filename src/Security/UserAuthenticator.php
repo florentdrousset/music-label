@@ -22,6 +22,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+
 class UserAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
@@ -32,13 +33,13 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
     private $passwordEncoder;
     private $session;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, SessionInterface $session)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
-
+        $this->session = $session;
     }
 
     public function supports(Request $request)
@@ -90,7 +91,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-
+        $this->session->getFlashBag()->add('success', 'ca marche');;
         return new RedirectResponse($this->urlGenerator->generate('index'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
