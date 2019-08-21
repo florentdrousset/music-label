@@ -91,7 +91,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        $this->session->getFlashBag()->add('success', 'ca marche');;
+        $this->session->getFlashBag()->add('success', 'Vous êtes connecté ! Bienvenue.');;
         return new RedirectResponse($this->urlGenerator->generate('index'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
