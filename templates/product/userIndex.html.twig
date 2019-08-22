@@ -4,7 +4,8 @@
 
 {% block body %}
     {% for p in products %}
-        <a href="{{ path('artist', {id: p.artist_id.id})}}"><h4>{{ p.name }}</h4></a>
+        <h4>{{ p.name }}</h4>
+        <h6>de <a href="{{ path('artist', {'id': p.artist_id.id})}}">{{ p.artist_id.name }}</a></h6>
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('img/' ~ p.img) }}" class="card-img-top" alt="...">
             <div class="card-body">

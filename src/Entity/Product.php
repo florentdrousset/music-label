@@ -147,6 +147,11 @@ class Product
         return $this->artist;
     }
 
+    public function getartist_id(): ?Artist
+    {
+        return $this->artist;
+    }
+
     public function setArtist(?Artist $artist): self
     {
         $this->artist = $artist;

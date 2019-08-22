@@ -30,9 +30,6 @@ class ProductController extends AbstractController
 
     public function userIndex(ProductRepository $productRepository, WikiController $wiki): Response
     {
-        /*$json = $wiki->curlRequest($product->getArtist());
-        $artist = json_decode($json, true);
-        var_dump($artist);*/
 
         return $this->render('product/userIndex.html.twig', [
             'products' => $productRepository->findAll(),

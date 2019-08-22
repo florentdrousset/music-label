@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Api\WikiController;
 use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
@@ -28,10 +29,14 @@ class ArtistController extends AbstractController
     /**
      * @Route("/{id}", name="artist", methods={"GET"})
      */
-    public function oneArtist(Artist $artist): Response
+    public function oneArtist(Artist $artist, WikiController $wiki): Response
     {
+        $json = $wiki->curlRequest($artist->getName());
+        $artistDesc = json_decode($json, true);
+        $artistDesc = $artistDesc[2][0];
         return $this->render('artist/artistIndex.html.twig', [
             'artist' => $artist,
+            'artistDesc' => $artistDesc
         ]);
     }
 
