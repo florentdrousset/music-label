@@ -7,6 +7,7 @@ use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -108,5 +109,21 @@ class ArtistController extends AbstractController
         }
 
         return $this->redirectToRoute('artist_index');
+    }
+
+    /**
+     * @Route("/artist/{id}/same-style", name="artist_style", methods={"GET","POST"})
+     */
+    public function sameStyle(ArtistRepository $ar, Artist $artist) {
+        $style = $artistRepository->findBy(
+            ['style' => $artist->getGenre()]
+        );
+
+        return new JsonResponse(array(
+            'style' => $style
+            )
+        );
+        // 2 ->créer(id, nom)
+        // 3 renvoyer une JSONResponse($data)
     }
 }
