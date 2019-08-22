@@ -26,6 +26,16 @@ class ArtistController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="artist", methods={"GET"})
+     */
+    public function oneArtist(Artist $artist): Response
+    {
+        return $this->render('artist/artistIndex.html.twig', [
+            'artist' => $artist,
+        ]);
+    }
+
+    /**
      * @Route("/new", name="artist_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response

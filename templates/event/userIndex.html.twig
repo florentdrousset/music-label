@@ -4,12 +4,14 @@
 
 {% block body %}
     {% for e in events %}
-        <h4><a href="{{ path('event', {'id': e.id}) }}">{{ e.type }}</a></h4>
+        <!--<h4><a href="{{ path('event', {'id': e.id}) }}">{{ e.type }}</a></h4>
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('img/' ~ e.img) }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="card-text">{{ e.description }}</p>
             </div>
-        </div>
+        </div>-->
+
+        {{ e.img | figure(e.description) | raw }}
     {% endfor %}
 {% endblock %}

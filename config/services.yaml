@@ -34,3 +34,11 @@ services:
             $p: 'Hector'
             $prenom: '%p1%'
             #ici, le %p1% fait référence à notre paramètre p1
+
+        #calls:
+        #    - method:setContainer
+        #        arguments:
+        #            - '@service_container'
+
+        # tags :
+        #    - twig.extension

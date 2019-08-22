@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Api\WikiController;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
@@ -27,10 +28,15 @@ class ProductController extends AbstractController
         ]);
     }
 
-    public function userIndex(ProductRepository $productRepository): Response
+    public function userIndex(ProductRepository $productRepository, WikiController $wiki): Response
     {
+        /*$json = $wiki->curlRequest($product->getArtist());
+        $artist = json_decode($json, true);
+        var_dump($artist);*/
+
         return $this->render('product/userIndex.html.twig', [
             'products' => $productRepository->findAll(),
+            //'artist' => $artist
         ]);
     }
 
