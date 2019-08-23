@@ -120,7 +120,8 @@ class ArtistController extends AbstractController
         );
         $filteredList = array_map(function($item) {
             return ['id' => $item->getId(),
-                'name' => $item->getName()
+                'name' => $item->getName(),
+                'href' => $this->generateUrl('artist', ['id' => $item->getId()])
             ];
         }, $list);
         return new JsonResponse($filteredList);

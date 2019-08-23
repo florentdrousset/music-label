@@ -21,16 +21,12 @@
                     return response.json();
                 }).then(function(json) {
                 div.innerHTML = '';
-
-                /*for (item in json) {
-                        resultArray.push(json[item].name);
-                    }*/
                     for(let i = 0; i < json.length; i++) {
                         if (json[i].name == "{{ artist.name }}") {
 
                         } else {
                         var p = document.createElement('p');
-                        p.innerText = json[i].name;
+                        p.innerHTML = `<a href="${json[i].href}">${json[i].name}</a>`;
                         div.appendChild(p);
                         }
                 }
