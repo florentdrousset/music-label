@@ -4,7 +4,47 @@
 
 {% block body %}
 <h1>{{ artist.name }}</h1>
-
 <p>{{ artistDesc }}</p>
-    <script defer src="{{ asset('js/promises.js') }}"></script>
+    <button type="button" class="btn btn-info">Plus d'artistes du même style</button>
+    <article class="hidden">
+        <h4>Nom d'artiste</h4>
+    </article>
+    <script>
+        var test = 1;
+        var div = document.querySelector('.hidden');
+        var button = document.querySelector('.btn');
+        // FUNCTIONS
+
+        function asyncRequest() {
+            fetch("{{ path('artist_style', {'id': artist.id}) }}")
+                .then(function(response) {
+                    return response.json();
+                }).then(function(json) {
+                div.innerHTML = '';
+
+                /*for (item in json) {
+                        resultArray.push(json[item].name);
+                    }*/
+                    for(let i = 0; i < json.length; i++) {
+                        if (json[i].name == "{{ artist.name }}") {
+
+                        } else {
+                        var p = document.createElement('p');
+                        p.innerText = json[i].name;
+                        div.appendChild(p);
+                        }
+                }
+            })
+        }
+
+        function hide() {
+            div.classList.toggle('hidden');
+            let results = asyncRequest();
+        }
+
+        // EVENT LISTENERS
+
+        button.addEventListener('click', hide, true);
+
+    </script>
 {% endblock %}

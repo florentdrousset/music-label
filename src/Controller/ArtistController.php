@@ -112,18 +112,17 @@ class ArtistController extends AbstractController
     }
 
     /**
-     * @Route("/artist/{id}/same-style", name="artist_style", methods={"GET","POST"})
+     * @Route("/{id}/same-style", name="artist_style", methods={"GET","POST"})
      */
     public function sameStyle(ArtistRepository $ar, Artist $artist) {
-        $style = $artistRepository->findBy(
-            ['style' => $artist->getGenre()]
+        $list = $ar->findBy(
+            ['genre' => $artist->getGenre()]
         );
-
-        return new JsonResponse(array(
-            'style' => $style
-            )
-        );
-        // 2 ->créer(id, nom)
-        // 3 renvoyer une JSONResponse($data)
+        $filteredList = array_map(function($item) {
+            return ['id' => $item->getId(),
+                'name' => $item->getName()
+            ];
+        }, $list);
+        return new JsonResponse($filteredList);
     }
 }

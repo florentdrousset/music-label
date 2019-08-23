@@ -1,3 +1,4 @@
+<script>
 // VARIABLES
 
 var div = document.querySelector('.hidden');
@@ -6,16 +7,21 @@ var button = document.querySelector('.btn');
 // FUNCTIONS
 
 function asyncRequest() {
-    fetch(`artist/${id}/same-style`)
-        .then(function(response) {
-            return response.json();
-        })
+fetch({{ path('artist_style', {'id': artist.id}) }})
+.then(function(response) {
+return response.json();
+}).then(function(json) {
+    console.log(json);
+})
 }
 
 function hide() {
-    div.classList.toggle('hidden');
+div.classList.toggle('hidden');
+asyncRequest();
 }
 
 // EVENT LISTENERS
 
 button.addEventListener('click', hide, true);
+
+</script>
