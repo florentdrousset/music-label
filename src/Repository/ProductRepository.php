@@ -47,4 +47,10 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function tunesByGenre() {
+        /*$q = $this->getEntityManager();
+        $query = $q->createQuery('SELECT p.id FROM App\Entity\Product JOIN  ');
+        $result = $query->getResult();
+        return $result;*/
+    }
 }

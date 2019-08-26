@@ -3,7 +3,8 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <div class="jumbotron">
+    <div class="jumbotron" style="display: flex">
+        <div>
         <h1>Admin</h1>
         <p>Bienvenue sur le panel d'administration</p>
         <p><a class="btn btn-primary btn-lg" href="{{ path('artist_index') }}" role="button">Artistes</a></p>
@@ -12,5 +13,21 @@
         <p><a class="btn btn-primary btn-lg" href="{{ path('event_index') }}" role="button">Evènements</a></p>
         <p><a class="btn btn-primary btn-lg" href="{{ path('streaming_index') }}" role="button">Streaming</a></p>
         <p><a class="btn btn-primary btn-lg" href="{{ path('news_index') }}" role="button">News</a></p>
+        </div>
+        <div>
+            <h4>Quelques données</h4>
+            <h5>Liste des artistes ayant participé au plus grand nombre d'évènements récemment :</h5>
+            <ul>
+                {% for a in artist %}
+                    <li>{{ a.name }}</li>
+                {%  endfor %}
+            </ul>
+            <h5>Nombre de morceaux par genre :</h5>
+            <h6>Rock</h6>
+            <ul>
+
+            </ul>
+        </div>
     </div>
+
 {% endblock %}
