@@ -16,7 +16,7 @@ class RegisterListener
 
             //Put the From address
             ->setFrom(['support@mailtrap.io'])
-            ->setTo(['coucou@lol.com'])
+            ->setTo($e->getUser()->getEmail())
             ->setBody('yo !');
 
         $this->mailer->send($message);

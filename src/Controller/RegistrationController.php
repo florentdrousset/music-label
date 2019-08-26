@@ -32,7 +32,8 @@ class RegistrationController extends AbstractController
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        $dispatcher->addListener(RegisterEvent::NAME, [$listener, 'sendMailToUser']);
+        //$dispatcher->addListener(RegisterEvent::NAME, [$listener, 'sendMailToUser']);
+        //on en a plus besoin, car on a défini cet event dans services.yaml
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
