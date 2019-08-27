@@ -50,19 +50,24 @@ class EventRepository extends ServiceEntityRepository
 
     */
     public function findByEvents() {
-        $q = $this->getEntityManager();
+        //Requete DQL classique
+        /*$q = $this->getEntityManager();
         $query = $q->createQuery('SELECT a.name FROM App\Entity\Event e JOIN e.artist_id a GROUP BY e.artist_id ORDER BY COUNT(e.artist_id) DESC')
         ->setMaxResults(10);
-        $result = $query->getResult();
-        return $result;
+        $result = $query->getResult();*/
 
+        /*return $result;*/
 
-        /*$this->createQueryBuilder('e')
-            ->innerJoin('e.artist', 'a')
-            ->orderBy('e.events', 'DESC')
-            ->setMaxResults(10)
+        //Version QueryBuilder
+        return $this->createQueryBuilder('e')
+            ->select('COUNT(e.artist_id) as maxE, a.name')
+            ->innerJoin('App\Entity\Artist', 'a')
+            ->where('a.id = e.artist_id')
+            ->groupBy('e.artist_id')
+            ->orderBy('maxE', 'DESC')
+            ->setMaxResults(2)
             ->getQuery()
-            ->getResult();*/
+            ->getResult();
     }
 
 }

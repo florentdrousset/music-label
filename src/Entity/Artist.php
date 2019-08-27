@@ -39,7 +39,7 @@ class Artist
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="artiste_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="artist_id")
      */
     private $events;
 

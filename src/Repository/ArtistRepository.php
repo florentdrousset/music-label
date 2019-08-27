@@ -23,16 +23,23 @@ class ArtistRepository extends ServiceEntityRepository
      * @return Artist[] Returns an array of Artist objects
      */
 
-    public function findByExampleField($value)
+    public function findByExampleField()
     {
+        // SOUS-REQUÊTE
+        $q1 = $this->createQueryBuilder('x');
+        $qexpr = $q1->expr();
+        $subrequest = $q1->select('x.id')
+            ->where($qexpr->like('x.country', $qexpr->literal('USA')));
+
+        // REQUÊTE PRINCIPALE
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('a.name')
+            ->innerJoin('a.events', 'e')
+            ->where($qexpr->in('a.id', $subrequest->getDQL())) // INJECTION SOUS-REQUÊTE
+            ->groupBy('a.id')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
    /* public function findByEvents() {
