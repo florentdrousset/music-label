@@ -23,9 +23,22 @@
                 {%  endfor %}
             </ul>
             <h5>Nombre de morceaux par genre :</h5>
-            <h6>Rock</h6>
             <ul>
-
+                {% for p in products %}
+                <li>{{ p.genre }} : {{ p.1 }}</li>
+                {% endfor %}
+            </ul>
+            <h5>Provenance des utilisateurs récemment inscrits</h5>
+            <ul>
+                {% for u in users %}
+                    <li>{{ u.city }}</li>
+                {%  endfor %}
+            </ul>
+            <h5>Dépenses moyennes d'un utilisateur :</h5>
+            <ul>
+                {% for e in userExp %}
+                    <li>{{ e.1 }}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>

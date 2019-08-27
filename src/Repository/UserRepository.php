@@ -47,4 +47,22 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getRecentUsersCities() {
+        return $this->createQueryBuilder('u')
+            ->select('u.city')
+            ->where('u.signUpDate > :month')
+            ->setParameter('month', new \DateTime('- 1 month'))
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getAverageExpenses() {
+        return $this->createQueryBuilder('u')
+            ->select('avg(u.expenses)')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

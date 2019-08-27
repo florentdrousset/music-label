@@ -47,10 +47,18 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function tunesByGenre() {
+    public function tunesByGenre()
+    {
         /*$q = $this->getEntityManager();
         $query = $q->createQuery('SELECT p.id FROM App\Entity\Product JOIN  ');
         $result = $query->getResult();
         return $result;*/
+
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id), a.genre')
+            ->innerJoin('p.artist', 'a')
+            ->groupBy('a.genre')
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -70,9 +70,20 @@ class User implements UserInterface
      */
     private $news;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $signUpDate;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $expenses;
+
     public function __construct()
     {
         $this->news = new ArrayCollection();
+        $this->signUpDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -254,5 +265,29 @@ class User implements UserInterface
     public function __toString()
     {
         return 'ok';
+    }
+
+    public function getSignUpDate(): ?\DateTimeInterface
+    {
+        return $this->signUpDate;
+    }
+
+    public function setSignUpDate(?\DateTimeInterface $signUpDate): self
+    {
+        $this->signUpDate = $signUpDate;
+
+        return $this;
+    }
+
+    public function getExpenses(): ?int
+    {
+        return $this->expenses;
+    }
+
+    public function setExpenses(?int $expenses): self
+    {
+        $this->expenses = $expenses;
+
+        return $this;
     }
 }
