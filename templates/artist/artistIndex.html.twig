@@ -4,6 +4,7 @@
 
 {% block body %}
 <h1>{{ artist.name }}</h1>
+
 <p>{{ artistDesc }}</p>
     <button type="button" class="btn btn-info">Plus d'artistes du même style</button>
     <article class="hidden">
@@ -14,6 +15,7 @@
         var div = document.querySelector('.hidden');
         var button = document.querySelector('.btn');
         // FUNCTIONS
+
 
         function asyncRequest() {
             fetch("{{ path('artist_style', {'id': artist.id}) }}")

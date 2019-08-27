@@ -17,6 +17,7 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         $faker = Faker\Factory::create();
+        $artists = [];
         for($i = 0 ; $i < 10; $i++)
         {
             $artist = new Artist();
@@ -25,16 +26,17 @@ class AppFixtures extends Fixture
             $artist->setGenre($faker->randomElement(array('Rock', 'Jazz', 'Soul', 'Ambient')));
             $artist->setDescription($faker->catchPhrase);
             $manager->persist($artist);
+            $artists[] = $artist;
         }
 
         for ($i = 0; $i < 10; $i++)
         {
             $artist = $artists[mt_rand(0, count($artists) -1)];
-            $product = new Product();
+            $product = new Productn();
             $product->setName($faker->name);
             $product->setDescription($faker->catchPhrase);
             $product->setProductionDate($faker->dateTimeBetween('-40 years'));
-            $product->setArtist();
+            $product->setArtist($artist);
         }
 /*
         for($i = 0; $i < 10; $i++) {

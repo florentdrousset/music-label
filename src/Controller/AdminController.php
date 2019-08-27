@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     function test(EventRepository $eventRepository, ProductRepository $productRepository, ArtistRepository $artistRepository, UserRepository $userRepository) {
-        dd($productRepository->tunesByGenre());
         return $this->render('admin/adminView.html.twig', [
             //'artist' => $eventRepository->findByEvents(),
             'artists' => $artistRepository->findByExampleField(),
