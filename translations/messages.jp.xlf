@@ -5,9 +5,9 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="dcTsAyj" resname="Salut">
+      <trans-unit id="dcTsAyj" resname="Salut les filles">
         <source>Salut les filles</source>
-        <target>女のこおはよう</target>
+        <target>女の子おはよう</target>
       </trans-unit>
     </body>
   </file>
